@@ -9,7 +9,7 @@
 	String password = request.getParameter("password");
 	String content = request.getParameter("content");
 	String regDate = request.getParameter("regDate");
-	
+	 
 	/*
 	System.out.println(name);
 	System.out.println(password);
