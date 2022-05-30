@@ -7,7 +7,7 @@ public class GuestVo {
 	private String password;
 	private String content;
 	private String regDate;
-	
+	 
 	
 	//생성자
 	public GuestVo() {
