@@ -137,7 +137,7 @@ public class GuestDao {
 	}
 	
 	//정보 삭제
-	public int guestDelete(GuestVo guestVo) {
+	public int guestDelete(int no) {
 		int count = -1;
 		getConnection();
 		
@@ -149,7 +149,7 @@ public class GuestDao {
 			
 			pstmt = conn.prepareStatement(query); 
 			
-			pstmt.setInt(1, guestVo.getNo()); 
+			pstmt.setInt(1, no); 
 
 			
 			count = pstmt.executeUpdate();
@@ -161,7 +161,44 @@ public class GuestDao {
 		}
 		close();
 		return count;
+	
+	}
+	
+	
+	//password가져오기 
+	public String getPassword(int no) {
+		String password = null;
+		getConnection();
+
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = ""; // 쿼리문 문자열만들기, ? 주의
+			query += " select password ";
+			query += " from guestbook ";
+			query += " where no = ? ";
+			
+			
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+
+			pstmt.setInt(1, no);// ?(물음표) 중 1번째, 순서중요
+			
+			//실행
+			rs = pstmt.executeQuery();
+			
+			// 4.결과처리
+			while(rs.next()) {
+			
+				password = rs.getString("password");
+				
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		close();
 		
+		return password;
 	}
 
 }
